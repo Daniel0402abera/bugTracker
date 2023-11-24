@@ -43,7 +43,7 @@ export function useGet(endpoint) {
 
       // try {
       //   const response = await api.get(`${endpoint}`);
-      //   console.log(response.data.data)
+    
       //   // const response = await fetch(`https://api.example.com/${endpoint}`); // replace with your API base URL
       //   // if (!response.ok) {
       //   //   throw new Error('Network response was not ok');

@@ -31,7 +31,7 @@ function UserPage() {
     isLoading: isLoadingRole,
   } = useGet("/api/v1/roles");
   const roleNames = roles?.map((role) => role.roleName);
-console.log(isLoadingRole)
+
   const columns = useMemo(
     () => [
       {
