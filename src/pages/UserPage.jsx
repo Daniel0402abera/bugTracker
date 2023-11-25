@@ -44,7 +44,6 @@ function UserPage() {
         accessorKey: "fullName",
         header: "Full Name",
         muiEditTextFieldProps: {
-          type: "email",
           required: true,
           error: !!validationErrors?.fullName,
           helperText: validationErrors?.fullName,
@@ -60,6 +59,7 @@ function UserPage() {
       {
         accessorKey: "email",
         header: "Email",
+        enableEditing: false,
         muiEditTextFieldProps: {
           type: "email",
           required: true,
@@ -254,11 +254,11 @@ function UserPage() {
             <EditIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Delete">
+        {/* <Tooltip title="Delete">
           <IconButton color="error" onClick={() => openDeleteConfirmModal(row)}>
             <DeleteIcon />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
       </Box>
     ),
     renderTopToolbarCustomActions: ({ table }) => (

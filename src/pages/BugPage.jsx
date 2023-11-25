@@ -576,22 +576,22 @@ function BugPage() {
             <EditIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="close bug">
+        <Tooltip title="Close Bug">
         <IconButton onClick={() => { setBugId(row.original.bugId); closeBug(); }}>
             <CloseIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="reOpen bug">
+        <Tooltip title="ReOpen Bug">
         <IconButton onClick={() => { setBugId(row.original.bugId); reopen(); }}>
             <BugReportIcon />
             
           </IconButton>
         </Tooltip>
-        <Tooltip title="Delete">
+        {/* <Tooltip title="Delete">
           <IconButton color="error" onClick={() => openDeleteConfirmModal(row)}>
             <DeleteIcon />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
       </Box>
     ),
     renderTopToolbarCustomActions: ({ table }) => (
