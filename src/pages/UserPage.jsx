@@ -26,9 +26,9 @@ function UserPage() {
 
   const {
     data: roles,
-    isError: isLoadingRoleError,
-    isFetching: isFetchingRole,
-    isLoading: isLoadingRole,
+    // isError: isLoadingRoleError,
+    // isFetching: isFetchingRole,
+    // isLoading: isLoadingRole,
   } = useGet("/api/v1/roles");
   const roleNames = roles?.map((role) => role.roleName);
 

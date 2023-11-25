@@ -13,13 +13,13 @@ export function useUpdate(endpoint) {
         const response = await api.put(`${endpoint}`, newUserInfo,configHeader);
 
         // Wait for a fake delay to simulate the API call
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        // await new Promise((resolve) => setTimeout(resolve, 1000));
 
         // If the API call is successful, you can return the updated user data
         return response.data;
       } catch (error) {
         // You can customize the error handling based on your API response
-        throw new Error('Failed to update user');
+        // throw new Error('Failed to update user');
       }
     },
     onMutate: (newUserInfo) => {
