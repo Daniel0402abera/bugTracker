@@ -4,25 +4,29 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import PeopleIcon from "@mui/icons-material/People";
 import { useNavigate } from "react-router-dom";
-import InventoryIcon from '@mui/icons-material/Inventory';
-import StoreIcon from '@mui/icons-material/Store';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import StorefrontIcon from '@mui/icons-material/Storefront';
-import CategoryIcon from '@mui/icons-material/Category';
+import BugReportIcon from '@mui/icons-material/BugReport';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 const menus = [
   {
     index: 0,
     link: "/dashboard/bug",
-    title: "bug",
-    icon: <StoreIcon />,
-    roles: [],
+    title: "Bug",
+    icon: <BugReportIcon />,
+    roles: ['ADMIN','DEVELOPER','TESTER'],
   },
   {
     index: 1,
+    link: "/dashboard/assign_bug",
+    title: "Assign User",
+    icon: <AssignmentIndIcon />,
+    roles: ['ADMIN'],
+  },
+  {
+    index: 2,
     link: "/dashboard/user",
     title: "User",
-    icon: <CategoryIcon />,
-    roles: [],
+    icon: <PeopleIcon />,
+    roles: ['ADMIN'],
   }
 ];
 
@@ -35,9 +39,9 @@ function ListItems() {
   useEffect(() => {
     if (role) {
       setRole(role)
-      // setFilteredMenus(
-      //   menus.filter((menu) => menu.roles.includes(role))
-      // );
+      setFilteredMenus(
+        menus.filter((menu) => menu.roles.includes(role))
+      );
 
       
 
@@ -48,7 +52,7 @@ function ListItems() {
     setSelectedIndex(index);
   };
 
-  return menus?.map((menu, key) => (
+  return filteredMenus?.map((menu, key) => (
     <ListItemButton
       key={key}
       sx={{

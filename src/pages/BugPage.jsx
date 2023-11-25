@@ -449,7 +449,7 @@ function BugPage() {
     //optionally customize modal content
     renderCreateRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h5">Create New User</DialogTitle>
+        <DialogTitle variant="h5">Create New Bug</DialogTitle>
         <DialogContent
           sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
         >
@@ -607,7 +607,7 @@ function BugPage() {
           // );
         }}
       >
-        Create New User
+        Create New Bug
       </Button>
     ),
 
