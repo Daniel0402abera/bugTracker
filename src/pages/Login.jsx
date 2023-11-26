@@ -18,6 +18,7 @@ import jwt from "jsonwebtoken";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import api from '../services/api'
+import { toast } from "react-toastify";
 
 function Copyright(props) {
   return (
@@ -39,6 +40,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { login } = useAuth();
@@ -46,6 +48,7 @@ export default function SignIn() {
   const {
     mutate: loginMutation,
     isLoading,
+    isPending,
     data,
     isError,
     error,
@@ -60,6 +63,9 @@ export default function SignIn() {
         const response = await api.post('login', credentials, config);
         
         if (response.status === 200) {
+          toast.success("Success Login !", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
           return response.data;
         } else if (response.status === 401) {
           throw new Error('Unauthorized: Invalid credentials');
@@ -68,6 +74,9 @@ export default function SignIn() {
         }
       } catch (error) {
         if (error.response) {
+          toast.error(`${error.message}`, {
+            position: toast.POSITION.TOP_CENTER,
+          });
           if (error.response.status === 400) {
             throw new Error('Invalid data ');
           } else if (error.response.status === 401) {
@@ -140,7 +149,9 @@ export default function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     loginMutation(formik.values);
+
     if (data) {
       navigate("/dashboard");
     }
@@ -203,12 +214,15 @@ export default function SignIn() {
             <Button
               type="submit"
               fullWidth
+              
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={handleSubmit}
             >
-              {isLoading ? "Loading..." : "Sign In"}
+              {isPending ? "Loading..." : "Sign In"}
             </Button>
+
+            
             <Typography variant="h6" component="h2">
               <p style={{ margin: "0px", color: "red" }}>
                 {isError ? error.message : ""}

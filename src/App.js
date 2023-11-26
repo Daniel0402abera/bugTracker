@@ -8,6 +8,7 @@ import { AuthProvider } from "./context/AuthContext";
 import PrivateRoutes from "./services/PrivateRoutes";
 import BugPage from "./pages/BugPage";
 import AssignUser from "./pages/AssignUser";
+import { ToastContainer} from 'react-toastify';
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,8 @@ function App() {
                 </Route>
               </Route>
             </Routes>
+            
+             <ToastContainer />
           </AuthProvider>
         </QueryClientProvider>
       </BrowserRouter>

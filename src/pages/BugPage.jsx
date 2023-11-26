@@ -28,6 +28,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from '@mui/icons-material/Close';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import DeleteIcon from "@mui/icons-material/Delete";
+import { toast } from "react-toastify";
 
 
 function BugPage() {
@@ -340,7 +341,7 @@ function BugPage() {
 
   //call CREATE hook
   const { mutateAsync: createUser, isPending: isCreatingUser } =
-    useCreate("/api/v1/bugs");
+    useCreate("/api/v1/bug");
   //call READ hook
   const {
     data: fetchedUsers,
@@ -357,7 +358,7 @@ function BugPage() {
     `/api/v1/bugs/${bugId}`
   );
 
-  const { mutateAsync: closeBug, isPending: isClosingBug } = useUpdate(
+  const { mutateAsync: closeBug, isPending: isClosingBug ,isError:isErrorClosingBug,isSuccess} = useUpdate(
     `/api/v1/bugs/${bugId}/close`
   );
 
@@ -411,6 +412,27 @@ function BugPage() {
   const openDeleteConfirmModal = (row) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       deleteUser(row.original.id);
+    }
+  };
+
+
+
+  
+
+  const openCloseConfirmModal =async (row) => {
+    if (window.confirm(`Are you sure you want to close bug issue with id of ${row.original.bugId}?`)) {
+    setBugId(row.original.bugId); 
+     await closeBug(); 
+     
+     
+    }
+  };
+  
+
+  const reOpenConfirmModal = async (row) => {
+    if (window.confirm(`Are you sure you want to reopen bug issue with id of ${row.original.bugId}?`)) {
+      setBugId(row.original.bugId); 
+      await reopen();
     }
   };
 
@@ -577,14 +599,14 @@ function BugPage() {
           </IconButton>
         </Tooltip>
         <Tooltip title="Close Bug">
-        <IconButton onClick={() => { setBugId(row.original.bugId); closeBug(); }}>
+        <IconButton onClick={() => openCloseConfirmModal(row)}>
             <CloseIcon />
           </IconButton>
         </Tooltip>
         <Tooltip title="ReOpen Bug">
-        <IconButton onClick={() => { setBugId(row.original.bugId); reopen(); }}>
+        <IconButton onClick={ () => reOpenConfirmModal(row) }>
             <BugReportIcon />
-            
+          
           </IconButton>
         </Tooltip>
         {/* <Tooltip title="Delete">

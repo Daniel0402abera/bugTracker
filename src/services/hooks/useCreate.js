@@ -2,6 +2,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../api";
 import { configHeader } from "../../constants";
+import { toast } from "react-toastify";
 
 export function useCreate(endpoint) {
   const queryClient = useQueryClient();
@@ -14,29 +15,23 @@ export function useCreate(endpoint) {
           configHeader
         );
 
-        if (response.status === 200) {
+       
+
+        if (response.status === 201) {
+          toast.success(`Successfull Added!`, {
+            position: toast.POSITION.TOP_CENTER,
+          });
           return response.data;
         } else if (response.status === 401) {
+
           throw new Error("Unauthorized: Invalid credentials");
         } else {
           throw new Error(`Server Error: ${response.status}`);
         }
       } catch (error) {
-        if (error.response) {
-          if (error.response.status === 400) {
-            throw new Error("Invalid data ");
-          } else if (error.response.status === 401) {
-            throw new Error("You do not have permission to login");
-          } else if (error.response.status === 409) {
-            throw new Error("The resource already exists.");
-          } else {
-            throw new Error(`Server Error: ${error.response.status}`);
-          }
-        } else if (error.request) {
-          throw new Error("No response received from the server.");
-        } else {
-          // throw new Error('Error setting up the request.');
-        }
+        toast.error(error.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     },
     // client-side optimistic update

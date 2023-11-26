@@ -59,7 +59,6 @@ function UserPage() {
       {
         accessorKey: "email",
         header: "Email",
-        enableEditing: false,
         muiEditTextFieldProps: {
           type: "email",
           required: true,

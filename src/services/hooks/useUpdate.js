@@ -2,6 +2,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '../api'; // Assuming the axios instance is in a separate file
 import { configHeader } from '../../constants';
+import { toast } from 'react-toastify';
 
 export function useUpdate(endpoint) {
   const queryClient = useQueryClient();
@@ -11,13 +12,22 @@ export function useUpdate(endpoint) {
       try {
         // Assume your API endpoint is '/api/updateUser'
         const response = await api.put(`${endpoint}`, newUserInfo,configHeader);
-
+        if (response.status === 200){
+          toast.success(`Successfull Done!`, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        
         // Wait for a fake delay to simulate the API call
         // await new Promise((resolve) => setTimeout(resolve, 1000));
-
+          
         // If the API call is successful, you can return the updated user data
         return response.data;
       } catch (error) {
+
+        toast.error(error.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
         // You can customize the error handling based on your API response
         // throw new Error('Failed to update user');
       }
