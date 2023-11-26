@@ -12,12 +12,12 @@ import LockIcon from "@mui/icons-material/Lock";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../context/AuthContext";
 import jwt from "jsonwebtoken";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import api from '../services/api'
+import api from "../services/api";
 import { toast } from "react-toastify";
 
 function Copyright(props) {
@@ -35,12 +35,9 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { login } = useAuth();
@@ -56,18 +53,18 @@ export default function SignIn() {
       try {
         const config = {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         };
-        const response = await api.post('login', credentials, config);
-        
+        const response = await api.post("login", credentials, config);
+
         if (response.status === 200) {
           toast.success("Success Login !", {
             position: toast.POSITION.TOP_RIGHT,
           });
           return response.data;
         } else if (response.status === 401) {
-          throw new Error('Unauthorized: Invalid credentials');
+          throw new Error("Unauthorized: Invalid credentials");
         } else {
           throw new Error(`Server Error: ${response.status}`);
         }
@@ -77,61 +74,35 @@ export default function SignIn() {
             position: toast.POSITION.TOP_CENTER,
           });
           if (error.response.status === 400) {
-            throw new Error('Invalid data ');
+            throw new Error("Invalid data ");
           } else if (error.response.status === 401) {
-            throw new Error('You do not have permission to login');
+            throw new Error("You do not have permission to login");
           } else if (error.response.status === 409) {
-            throw new Error('The resource already exists.');
+            throw new Error("The resource already exists.");
           } else {
             throw new Error(`Server Error: ${error.response.status}`);
           }
         } else if (error.request) {
-          throw new Error('No response received from the server.');
+          throw new Error("No response received from the server.");
         } else {
-          throw new Error('Error setting up the request.');
+          throw new Error("Error setting up the request.");
         }
       }
     },
-    //  
-    // onMutate: (credentials) => {
-    //   queryClient.setQueryData(['users'], (prevUsers) => [
-    //     ...prevUsers,
-    //     {
-    //       ...credentials,
-    //       id: (Math.random() + 1).toString(36).substring(7),
-    //     },
-    //   ]);
-    // },
+
     onSuccess: (data) => {
       const decodedToken = jwt.decode(data?.access_token);
       const decodedUser = {
         username: decodedToken.sub,
         role: decodedToken?.role[0],
       };
-      localStorage.setItem('role', decodedToken?.role);
-      localStorage.setItem('access_token', data?.access_token );
-      // Assuming you have a login function for authentication
-      // Make sure to implement the login function in your application
+      localStorage.setItem("role", decodedToken?.role);
+      localStorage.setItem("access_token", data?.access_token);
       login({ user: decodedUser, access_token: data?.access_token });
 
-      queryClient.invalidateQueries('users'); // Optionally, refetch user data
+      queryClient.invalidateQueries("users");
     },
   });
-
-  
-
-  // useMutation(loginUser, {
-  //   onSuccess: (data) => {
-  //     const decodedToken = jwt.decode(data?.access_token);
-  //     const decodedUser = {
-  //       usename: decodedToken.sub,
-  //       role: decodedToken?.role[0],
-  //     };
-  //     localStorage.setItem("role",decodedToken?.role)
-  //     login({ user: decodedUser, access_token: data?.access_token });
-  //     queryClient.invalidateQueries("userData"); // Optionally, refetch user data
-  //   },
-  // });
 
   React.useEffect(() => {
     if (data) {
@@ -213,7 +184,6 @@ export default function SignIn() {
             <Button
               type="submit"
               fullWidth
-              
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={handleSubmit}
@@ -221,7 +191,6 @@ export default function SignIn() {
               {isPending ? "Loading..." : "Sign In"}
             </Button>
 
-            
             <Typography variant="h6" component="h2">
               <p style={{ margin: "0px", color: "red" }}>
                 {isError ? error.message : ""}

@@ -8,6 +8,7 @@ import { validateUser } from "../utils/validation";
 import { useCreate } from "../services/hooks/useCreate";
 import { useGet } from "../services/hooks/useGet";
 import { useUpdate } from "../services/hooks/useUpdate";
+import { useDelete } from "../services/hooks/useDelete";
 import {
   Box,
   Button,
@@ -148,6 +149,8 @@ function UserPage() {
 
   //call UPDATE hook
   const { mutateAsync: updateUser, isPending: isUpdatingUser } = useUpdate('/api/v1/users');
+  //call DELETE hook
+  const { isPending: isDeletingUser } = useDelete();
 
   //CREATE action
   const handleCreateUser = async ({ values, table }) => {
@@ -185,13 +188,13 @@ function UserPage() {
     table.setEditingRow(null); //exit editing mode
   };
 
-
+  
 
   const table = useMaterialReactTable({
     columns,
     data: fetchedUsers || [],
-    createDisplayMode: "modal", //default ('row', and 'custom' are also available)
-    editDisplayMode: "modal", //default ('row', 'cell', 'table', and 'custom' are also available)
+    createDisplayMode: "modal", 
+    editDisplayMode: "modal", 
     enableEditing: true,
     positionActionsColumn: "last",
     getRowId: (row) => row.id,
@@ -210,7 +213,6 @@ function UserPage() {
     onCreatingRowSave: handleCreateUser,
     onEditingRowCancel: () => setValidationErrors({}),
     onEditingRowSave: handleSaveUser,
-    //optionally customize modal content
     renderCreateRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
         <DialogTitle variant="h5">Create New User</DialogTitle>
@@ -231,7 +233,7 @@ function UserPage() {
         <DialogContent
           sx={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
         >
-          {internalEditComponents} {/* or render custom edit components here */}
+          
         </DialogContent>
         <DialogActions>
           <MRT_EditActionButtons variant="text" table={table} row={row} />
@@ -245,24 +247,14 @@ function UserPage() {
             <EditIcon />
           </IconButton>
         </Tooltip>
-        {/* <Tooltip title="Delete">
-          <IconButton color="error" onClick={() => openDeleteConfirmModal(row)}>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip> */}
+      
       </Box>
     ),
     renderTopToolbarCustomActions: ({ table }) => (
       <Button
         variant="contained"
         onClick={() => {
-          table.setCreatingRow(true); //simplest way to open the create row modal with no default values
-          //or you can pass in a row object to set default values with the `createRow` helper function
-          // table.setCreatingRow(
-          //   createRow(table, {
-          //     //optionally pass in default values for the new row, useful for nested data or other complex scenarios
-          //   }),
-          // );
+          table.setCreatingRow(true); 
         }}
       >
         Create New User
@@ -271,7 +263,7 @@ function UserPage() {
 
     state: {
       isLoading: isLoadingUsers,
-      isSaving: isCreatingUser || isUpdatingUser,
+      isSaving: isCreatingUser || isUpdatingUser || isDeletingUser,
       showAlertBanner: isLoadingUsersError,
       showProgressBars: isFetchingUsers,
     },

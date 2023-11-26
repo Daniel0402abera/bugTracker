@@ -63,16 +63,6 @@ export default function Dashboard() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  // const LogoutIcon = () => (
-  //   <img
-  //     src={logoutIcon}
-  //     alg={"profile icon"}
-  //     style={{
-  //       width: "11px",
-  //       marginRight: 4,
-  //     }}
-  //   />
-  // );
 
   const logoutIconStyle = {
     backgroundColor: "#FFF",
