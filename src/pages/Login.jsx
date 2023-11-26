@@ -135,7 +135,7 @@ export default function SignIn() {
 
   React.useEffect(() => {
     if (data) {
-      navigate("/dashboard");
+      navigate("/dashboard/bug");
     }
   }, [data, navigate]);
 
