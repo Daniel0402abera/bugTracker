@@ -38,5 +38,5 @@ Once the containers are up and running, you can access the Store Management app 
 
 ## For Login use defualt admin 
 
-- userName: john
+- userName: john@admin.com
 - password: 123456
