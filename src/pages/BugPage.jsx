@@ -442,7 +442,7 @@ function BugPage() {
             <BugReportIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Delete">
+        <Tooltip title="update">
           <IconButton
             color="error"
             onClick={() => {
