@@ -1,85 +1,40 @@
 // useUpdateUser.js
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '../api'; // Assuming the axios instance is in a separate file
-import { configHeader } from '../../constants';
-import { toast } from 'react-toastify';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import api from "../api"; // Assuming the axios instance is in a separate file
+import { configHeader } from "../../constants";
+import { toast } from "react-toastify";
 
-export function useUpdate(endpoint) {
+export function useUpdate(endpoint, Key) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (newUserInfo) => {
       try {
-        // Assume your API endpoint is '/api/updateUser'
-        const response = await api.put(`${endpoint}`, newUserInfo,configHeader);
-        if (response.status === 200){
-          toast.success(`Successfull Done!`, {
+        const response = await api.put(
+          `${endpoint}`,
+          newUserInfo,
+          configHeader
+        );
+        if (response.status === 200) {
+          toast.success(`Successfully Done!`, {
             position: toast.POSITION.TOP_CENTER,
           });
         }
-        
-        // Wait for a fake delay to simulate the API call
-        // await new Promise((resolve) => setTimeout(resolve, 1000));
-          
-        // If the API call is successful, you can return the updated user data
+
         return response.data;
       } catch (error) {
+        console.log(error);
 
-        toast.error(error.message, {
+        toast.error(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
-        // You can customize the error handling based on your API response
-        // throw new Error('Failed to update user');
       }
     },
-    onMutate: (newUserInfo) => {
-      // Optimistic update
-      queryClient.setQueryData(['users'], (prevUsers) =>
-        prevUsers?.map((prevUser) =>
-          prevUser.id === newUserInfo.id ? newUserInfo : prevUser,
-        ),
-      );
+    onMutate: async () => {
+      await queryClient.prefetchQuery({ Key });
     },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['users'] }), // Refetch users after mutation
+    onSettled: () => queryClient.invalidateQueries({ queryKey: Key }),
+    
   });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // useUpdateUser.js
-// import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-// export function useUpdate() {
-//   const queryClient = useQueryClient();
-//   return useMutation({
-//     mutationFn: async (user) => {
-//       //send api update request here
-
-//       await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
-//       return Promise.resolve();
-//     },
-//     //client side optimistic update
-//     onMutate: (newUserInfo) => {
-//       queryClient.setQueryData(['users'], (prevUsers) =>
-//         prevUsers?.map((prevUser) =>
-//           prevUser.id === newUserInfo.id ? newUserInfo : prevUser,
-//         ),
-//       );
-//     },
-//     // onSettled: () => queryClient.invalidateQueries({ queryKey: ['users'] }), //refetch users after mutation, disabled for demo
-//   });
-// }

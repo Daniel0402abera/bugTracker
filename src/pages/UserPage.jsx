@@ -8,7 +8,6 @@ import { validateUser } from "../utils/validation";
 import { useCreate } from "../services/hooks/useCreate";
 import { useGet } from "../services/hooks/useGet";
 import { useUpdate } from "../services/hooks/useUpdate";
-import { useDelete } from "../services/hooks/useDelete";
 import {
   Box,
   Button,
@@ -19,7 +18,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+
 
 function UserPage() {
   const [validationErrors, setValidationErrors] = useState({});
@@ -149,8 +148,6 @@ function UserPage() {
 
   //call UPDATE hook
   const { mutateAsync: updateUser, isPending: isUpdatingUser } = useUpdate('/api/v1/users');
-  //call DELETE hook
-  const { mutateAsync: deleteUser, isPending: isDeletingUser } = useDelete();
 
   //CREATE action
   const handleCreateUser = async ({ values, table }) => {
@@ -188,12 +185,7 @@ function UserPage() {
     table.setEditingRow(null); //exit editing mode
   };
 
-  //DELETE action
-  const openDeleteConfirmModal = (row) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      deleteUser(row.original.id);
-    }
-  };
+
 
   const table = useMaterialReactTable({
     columns,
@@ -279,7 +271,7 @@ function UserPage() {
 
     state: {
       isLoading: isLoadingUsers,
-      isSaving: isCreatingUser || isUpdatingUser || isDeletingUser,
+      isSaving: isCreatingUser || isUpdatingUser,
       showAlertBanner: isLoadingUsersError,
       showProgressBars: isFetchingUsers,
     },
