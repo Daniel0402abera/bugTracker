@@ -20,6 +20,9 @@ This repository contains the frontend codebase for the Bug Tracking application.
 
 - If you want to configure the app to connect to a deployed backend server, open the api.js file in services folder then,Update the baseURL to 'https://bug-tracker-zdic.onrender.com'.
 
+## Doc for endpoints
+- 'https://bug-tracker-zdic.onrender.com/swagger-ui/index.html'
+
 
 ## Running the App:
 ## Local Development:
