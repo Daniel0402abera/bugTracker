@@ -26,9 +26,6 @@ function UserPage() {
 
   const {
     data: roles,
-    // isError: isLoadingRoleError,
-    // isFetching: isFetchingRole,
-    // isLoading: isLoadingRole,
   } = useGet("/api/v1/roles");
   const roleNames = roles?.map((role) => role.roleName);
 
@@ -83,54 +80,25 @@ function UserPage() {
           error: !!validationErrors?.role,
           helperText: validationErrors?.role,
         },
-        // muiEditTextFieldProps: {
-        //   type: 'email',
-        //   required: true,
-        //   error: !!validationErrors?.email,
-        //   helperText: validationErrors?.email,
-        //   //remove any previous validation errors when user focuses on the input
-        //   onFocus: () =>
-        //     setValidationErrors({
-        //       ...validationErrors,
-        //       email: undefined,
-        //     }),
-        // },
+        
       },
       {
         accessorKey: "lastLoggedIn",
         header: "Last LoggedIn",
         enableEditing: false,
-        // editVariant: 'select',
-        // editSelectOptions: usStates,
-        // muiEditTextFieldProps: {
-        //   select: true,
-        //   error: !!validationErrors?.state,
-        //   helperText: validationErrors?.state,
-        // },
+        
       },
       {
         accessorKey: "createdAt",
         header: "CreatedAt",
         enableEditing: false,
-        // editVariant: 'select',
-        // editSelectOptions: usStates,
-        // muiEditTextFieldProps: {
-        //   select: true,
-        //   error: !!validationErrors?.state,
-        //   helperText: validationErrors?.state,
-        // },
+        
       },
       {
         accessorKey: "updatedAt",
         header: "updatedAt",
         enableEditing: false,
-        // editVariant: 'select',
-        // editSelectOptions: usStates,
-        // muiEditTextFieldProps: {
-        //   select: true,
-        //   error: !!validationErrors?.state,
-        //   helperText: validationErrors?.state,
-        // },
+        
       },
     ],
     [roleNames, validationErrors]

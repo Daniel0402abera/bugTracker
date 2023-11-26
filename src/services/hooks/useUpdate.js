@@ -1,11 +1,15 @@
-// useUpdateUser.js
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../api"; // Assuming the axios instance is in a separate file
-import { configHeader } from "../../constants";
 import { toast } from "react-toastify";
 
 export function useUpdate(endpoint, Key) {
   const queryClient = useQueryClient();
+  const configHeader = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem("access_token")} `,
+    },
+  };
 
   return useMutation({
     mutationFn: async (newUserInfo) => {
@@ -23,7 +27,7 @@ export function useUpdate(endpoint, Key) {
 
         return response.data;
       } catch (error) {
-        console.log(error);
+      
 
         toast.error(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,

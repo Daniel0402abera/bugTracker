@@ -91,7 +91,6 @@ function BugPage() {
   };
 
   const [open, setOpen] = React.useState(false);
-  console.log(open);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setInputValues(initialInputValues);
