@@ -234,13 +234,15 @@ function BugPage() {
     useCreate("/api/v1/bugs");
   //call READ hook
   const {
-    data: fetchedUsers,
+    data: fetchedBugs,
     isError: isLoadingUsersError,
     isFetching: isFetchingUsers,
     isLoading: isLoadingUsers,
   } = useGet("/api/v1/bugs");
   //call read hook of role api
-
+  const filteredBugs = fetchedBugs?.filter(bug => bug.hasOwnProperty('assignedUser'));
+  console.log(fetchedBugs)
+  console.log(filteredBugs);
   //call UPDATE hook
 
   const { mutateAsync: updateUser, isPending: isUpdatingUser } = useUpdate(
@@ -306,7 +308,7 @@ function BugPage() {
 
   const table = useMaterialReactTable({
     columns,
-    data: fetchedUsers || [],
+    data: fetchedBugs || [],
     createDisplayMode: "modal",
     editDisplayMode: "modal",
     enableEditing: true,
