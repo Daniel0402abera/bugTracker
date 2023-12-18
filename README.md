@@ -7,7 +7,7 @@ This repository contains the frontend codebase for the Bug Tracking application.
 
 - Node.js and npm installed on your system.
 - Basic knowledge of React and Docker.
-- Access to the Store Management backend API (local or deployed).
+- Access to the Bug Tracking backend API (local or deployed).
 
 ## Configuration Options:
 ## Backend Configuration:
