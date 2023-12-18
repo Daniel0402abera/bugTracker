@@ -34,7 +34,7 @@ This repository contains the frontend codebase for the Bug Tracking application.
 
 
 ## Access the App
-Once the containers are up and running, you can access the Store Management app by opening your web browser and visiting http://localhost:3000.
+Once the containers are up and running, you can access the Bug Tracking app by opening your web browser and visiting http://localhost:3000.
 
 ## For Login use defualt admin 
 
