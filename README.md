@@ -1,6 +1,6 @@
 ## Bug Tracker Frontend React App
 
-This repository contains the frontend codebase for the Bug Tracking application. The app can be configured to connect to either a local backend server or a deployed server. Additionally, instructions for running the app from local is provided and also can use deployed endpoint
+This repository contains the frontend codebase for the Bug Tracking application at the main branch and the backend branch has backend codes. The app can be configured to connect to either a local backend server or a deployed server. Additionally, instructions for running the app locally are provided, and also use the deployed endpoint
 
 
 ## Prerequisites
