@@ -36,7 +36,7 @@ function BugPage() {
   const severity = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
 
   const inputFields = [
-    { label: "Title", stateVariable: "title" },
+    { label: "Title des", stateVariable: "title" },
     { label: "Steps To Reproduce", stateVariable: "stepsToReproduce" },
     { label: "Environment Details", stateVariable: "environmentDetails" },
     { label: "Description", stateVariable: "description" },

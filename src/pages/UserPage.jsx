@@ -165,7 +165,7 @@ function UserPage() {
     editDisplayMode: "modal", 
     enableEditing: true,
     positionActionsColumn: "last",
-    getRowId: (row) => row.id,
+    getRowId: (row) => row.userId,
     muiToolbarAlertBannerProps: isLoadingUsersError
       ? {
           color: "error",

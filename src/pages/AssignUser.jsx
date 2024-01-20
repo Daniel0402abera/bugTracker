@@ -12,7 +12,7 @@ function AssignUser() {
   const [selectedDevId, setSelectedDevId] = useState(null);
   const [selectedBugeId, setSelectedBugId] = useState(null);
 
-  const handleSelecteDevIdChange = async (newSelectedId) => {
+  const handleSelecteDevIdChange =  (newSelectedId) => {
     setSelectedDevId(newSelectedId);
   };
   const handleSelectedBugIdChange = async (newSelectedId) => {
@@ -87,7 +87,7 @@ function AssignUser() {
   }
   
   function stringAvatar(name) {
-    console.log(name)
+  
     if (name === "undefined" || typeof name !== 'string' ) {
       return 'Name'; // Return an empty object or handle it in a way that makes sense for your application
     }else return {

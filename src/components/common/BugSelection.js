@@ -138,8 +138,8 @@ export default function BugSelection({ onSelectedBugChange }) {
 
 
   const handleSelectChange = (event, newValue) => {
-    const selectedOption = options?.find(option => option.label === newValue);
-    const newSelectedId = selectedOption ? selectedOption.id : null;
+    const selectedOption = options?.find(option => option?.label === newValue);
+    const newSelectedId = selectedOption ? selectedOption?.id : null;
     setSelectedId(newSelectedId);
     onSelectedBugChange(newSelectedId); // Call the callback function with the new selected ID
   };

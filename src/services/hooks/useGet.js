@@ -10,6 +10,7 @@ export function useGet(endpoint) {
         const config = {
           headers: {
             "Content-Type": "application/json",
+            
           },
         };
 

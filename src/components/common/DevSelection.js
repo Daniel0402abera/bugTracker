@@ -137,9 +137,9 @@ export default function DevSelection({ onSelectedDevChange }) {
   // };
 
 
-  const handleSelectChange = (event, newValue) => {
-    const selectedOption = options?.find(option => option.label === newValue);
-    const newSelectedId = selectedOption ? selectedOption.id : null;
+  const handleSelectChange =  (event, newValue) => {
+    const selectedOption = options?.find(option => option?.label === newValue);
+    const newSelectedId = selectedOption ? selectedOption?.id : null;
     setSelectedId(newSelectedId);
     onSelectedDevChange(newSelectedId); // Call the callback function with the new selected ID
   };
@@ -149,8 +149,8 @@ export default function DevSelection({ onSelectedDevChange }) {
       disableListWrap
       PopperComponent={StyledPopper}
       ListboxComponent={ListboxComponent}
-      options={options?.map(option => option.label)}
-      value={options?.find(option => option.id === selectedId)?.label || null} // Set the value by finding the label from ID
+      options={options?.map(option => option?.label)}
+      value={options?.find(option => option?.id === selectedId)?.label || null} // Set the value by finding the label from ID
       onChange={handleSelectChange}
       // groupBy={(option) => option[0].toUpperCase()}
       renderInput={(params) => <TextField {...params} label="Select Dev To Fix the Bug From The List" />}
